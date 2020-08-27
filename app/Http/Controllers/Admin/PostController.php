@@ -71,12 +71,13 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
+            $post = Post::get()->last();
             $main_img = 'post_main_'.$post->id.'.'.$extension;
             $thumb_img = 'post_thumb_'.$post->id.'.'.$extension;
             $list_img = 'post_list_'.$post->id.'.'.$extension;
-            Image::make($file)->resize(653,569)->save(storage_path('/post/'.$main_img));
-            Image::make($file)->resize(360,309)->save(storage_path('/post/'.$list_img));
-            Image::make($file)->resize(122,122)->save(storage_path('/post/'.$thumb_img));
+            Image::make($file)->resize(653,569)->save(public_path('post/'.$main_img));
+            Image::make($file)->resize(360,309)->save(public_path('post/'.$list_img));
+            Image::make($file)->resize(122,122)->save(public_path('post/'.$thumb_img));
             $post->main_img = $main_img;
             $post->thumb_img = $thumb_img;
             $post->list_img = $list_img;
