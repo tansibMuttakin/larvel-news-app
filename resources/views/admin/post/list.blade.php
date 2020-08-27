@@ -68,7 +68,7 @@
                             @endif
                         </td>
                         <td>{{$row->title}}</td>
-                        <td></td>
+                        <td>{{$row->creator->name}}</td>
                         <td>{{$row->view_count}}</td>
                         <td>
                             @if($row->status === 1)

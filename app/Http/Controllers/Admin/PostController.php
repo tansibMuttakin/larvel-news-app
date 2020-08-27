@@ -19,9 +19,9 @@ class PostController extends Controller
     public function index()
     {
         if (Auth::user()->type === 1) {
-            $data = Post::orderBy('id','DESC')->get();
+            $data = Post::with('creator')->orderBy('id','DESC')->get();
         } else {
-            $data = Post::where('id',Auth::id())->orderBy('id','DESC')->get();
+            $data = Post::with('creator')->orderBywhere('id',Auth::id())->orderBy('id','DESC')->get();
         }
         return view('admin.post.list')->with('data',$data);
         
