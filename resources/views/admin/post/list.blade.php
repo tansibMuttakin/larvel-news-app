@@ -55,6 +55,7 @@
                         <th>Author</th>
                         <th>Total Views</th>
                         <th>Status</th>
+                        <th>Hot News</th>
                         <th>Options</th>
                       </tr>
                     </thead>
@@ -72,14 +73,22 @@
                         <td>{{$row->view_count}}</td>
                         <td>
                             @if($row->status === 1)
-                            <a href="{{url('back/post/status/'.$row->id)}}" class="btn btn-warning pull-right mx-2">Unpublished</a>
-                            @else
                             <a href="{{url('back/post/status/'.$row->id)}}" class="btn btn-success pull-right mx-2">Published</a>
+                            @else
+                            <a href="{{url('back/post/status/'.$row->id)}}" class="btn btn-warning pull-right mx-2">Unpublished</a>
                             @endif
                         </td>
                         <td>
-                            <a href="{{url('back/post/delete/'.$row->id)}}" class="btn btn-primary pull-right mx-2">Delete</a>
+                            @if($row->hot_news === 1)
+                            <a href="{{url('back/post/hot-news/'.$row->id)}}" class="btn btn-success pull-right mx-2">Yes</a>
+                            @else
+                            <a href="{{url('back/post/hot-news/'.$row->id)}}" class="btn btn-warning pull-right mx-2">No</a>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{url('back/post/delete/'.$row->id)}}" class="btn btn-danger pull-right mx-2">Delete</a>
                             <a href="{{url('back/post/edit/'.$row->id)}}" class="btn btn-primary pull-right">Edit</a>
+                            <a href="{{url('back/comment/'.$row->id)}}" class="btn btn-info pull-right mx-2">Comments</a>
                         </td>
                       </tr>
                     @endforeach  

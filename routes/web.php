@@ -22,6 +22,7 @@ Route::get('/details', 'DetailsPageController@index');
 Route::get('/adminPanel', function () {
     return view('admin.layout.master');
 });
+
 Route::prefix('back')->middleware('auth')->group(function () {
     Route::get('/','Admin\DashboardController@index');
 
@@ -61,10 +62,16 @@ Route::prefix('back')->middleware('auth')->group(function () {
     Route::post('/post/update/{id}','Admin\PostController@update');
     Route::get('/post/edit/{id}','Admin\PostController@edit');
     Route::get('/post/delete/{id}','Admin\PostController@destroy');
+    Route::get('/post/status/{id}','Admin\PostController@status');
+    Route::get('/post/hot-news/{id}','Admin\PostController@hot_news');
 
-    
+    Route::get('/comment/{id}','Admin\CommentController@index');
+    Route::get('/comment/reply/{id}','Admin\CommentController@reply');
+    Route::post('/comment/reply','Admin\CommentController@store');
+    Route::get('/comment/status/{id}','Admin\CommentController@status');
 
-
+    Route::get('/setting','Admin\SettingController@index');
+    Route::post('/setting/update','Admin\SettingController@update');
 });
 // Route::get('/about','AboutController@index');
 // Route::get('/back','DashboardController@index');
