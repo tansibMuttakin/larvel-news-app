@@ -405,7 +405,7 @@ section {
 
 @media (min-width: 768px) {
     .navigation-section .navbar-nav {
-        margin: 0 18%;
+        margin: 0 14%;
     }
     .navbar-default {
         background-color: #fff;
@@ -540,7 +540,7 @@ section {
 .m-menu .collapse,
 .m-menu .dropup,
 .m-menu .dropdown {
-    position: static;
+    position: relative;
 }
 
 .m-menu .container {

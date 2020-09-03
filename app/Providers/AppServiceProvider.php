@@ -31,7 +31,8 @@ class AppServiceProvider extends ServiceProvider
         $settings = Setting::all();
         $categories = Category::where('status',1)->get();
         $authors = User::where('type','!=',1)->get();
-        $posts = Post::with(['creator','comments'])->where('status',1)->orderBy('view_count','DESC')->get();
+        $most_viewed = Post::with(['comments','creator'])->where('status',1)->orderBy('view_count','DESC')->take(5)->get();
+        $most_commented = Post::withCount('comments')->where('status',1)->orderBy('comments_count','DESC')->take(5)->get();
         foreach($settings as $key=>$setting){
             if ($key==0) {
                 $system_name = $setting->value;
@@ -53,7 +54,8 @@ class AppServiceProvider extends ServiceProvider
             'admin_logo' => $admin_logo,
             'categories' => $categories,
             'authors' => $authors,
-            'posts' => $posts,
+            'posts' => $most_viewed,
+            'most_commented' => $most_commented,
         );
         View::share('shareData', $shareData);
     }

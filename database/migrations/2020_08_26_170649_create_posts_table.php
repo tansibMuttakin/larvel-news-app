@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->longText('short_description');
             $table->longText('description');
             $table->string('slug');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('category_id');
             $table->string('main_img');
             $table->string('thumb_img');
             $table->string('list_img');
@@ -28,6 +28,8 @@ class CreatePostsTable extends Migration
             $table->integer('status');
             $table->integer('created_by');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

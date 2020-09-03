@@ -21,7 +21,7 @@ class PostController extends Controller
         if (Auth::user()->type === 1) {
             $data = Post::with('creator')->orderBy('id','DESC')->get();
         } else {
-            $data = Post::with('creator')->orderBywhere('id',Auth::id())->orderBy('id','DESC')->get();
+            $data = Post::with('creator')->where('created_by',Auth::id())->orderBy('id','DESC')->get();
         }
         return view('admin.post.list')->with('data',$data);
         
@@ -196,7 +196,7 @@ class PostController extends Controller
     public function hot_news($id){
         $post = Post::find($id);
         if ($post->hot_news === 1) {
-            $post->status = 0;
+            $post->hot_news = 0;
         } else {
             $post->hot_news = 1;
         }

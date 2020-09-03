@@ -7,7 +7,7 @@ use App\Post;
 
 class Category extends Model
 {
-    public function post(){
-        return $this->hasOne(Post::class,'category_id','id');
+    public function posts(){
+        return $this->hasMany(Post::class,'category_id','id');
     }
 }

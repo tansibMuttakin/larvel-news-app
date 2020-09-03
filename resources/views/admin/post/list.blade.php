@@ -68,10 +68,10 @@
                             <img src="/post/{{$row->thumb_img}}" class="img img-responsive" alt="">
                             @endif
                         </td>
-                        <td>{{$row->title}}</td>
+                        <td style="width:130px;">{{$row->title}}</td>
                         <td>{{$row->creator->name}}</td>
-                        <td>{{$row->view_count}}</td>
-                        <td>
+                        <td style="width:10px;">{{$row->view_count}}</td>
+                        <td style="width:10px;">
                             @if($row->status === 1)
                             <a href="{{url('back/post/status/'.$row->id)}}" class="btn btn-success pull-right mx-2">Published</a>
                             @else
@@ -85,7 +85,7 @@
                             <a href="{{url('back/post/hot-news/'.$row->id)}}" class="btn btn-warning pull-right mx-2">No</a>
                             @endif
                         </td>
-                        <td>
+                        <td style="width:276px;">
                             <a href="{{url('back/post/delete/'.$row->id)}}" class="btn btn-danger pull-right mx-2">Delete</a>
                             <a href="{{url('back/post/edit/'.$row->id)}}" class="btn btn-primary pull-right">Edit</a>
                             <a href="{{url('back/comment/'.$row->id)}}" class="btn btn-info pull-right mx-2">Comments</a>
