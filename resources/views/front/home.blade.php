@@ -15,7 +15,7 @@
                     <div class="feature_article_inner">
                         <div class="tag_lg red"><a href="category.html">Hot News</a></div>
                         <div class="feature_article_title">
-                            <h1><a href="single.html" target="_self">{{$hot_news->title}}</a></h1>
+                            <h1><a href="#" target="_self">{{$hot_news->title}}</a></h1>
                         </div>
                         <!-- feature_article_title -->
 
@@ -96,328 +96,328 @@
 <div class="row">
 <div class="col-md-8">
 <div class="category_section mobile">
-@foreach($category_post as $category)
-            <div class="article_title header_purple">
-                <h2><a href="category.html" target="_self">{{$category->name}}</a></h2>
-            </div>
-            <!----article_title------>
-            @foreach($category->posts as $i => $post)
-            @if($i === 0)
-                <div class="category_article_wrapper">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="top_article_img">
-                                <a href="single.html" target="_self"><img class="img-responsive"
-                                                                        src="/post/{{$post->list_img}}" alt="{{$post->title}}">
-                                </a>
-                            </div>
-                            <!----top_article_img------>
-                        </div>
-                        <div class="col-md-6">
-                            <span class="tag purple">{{$category->name}}</span>
-
-                            <div class="category_article_title">
-                                <h2><a href="single.html" target="_self">{{$post->title}}</a></h2>
-                            </div>
-                            <!----category_article_title------>
-                            <div class="category_article_date"><a href="#">{{date('j F, Y',strtotime($post->created_at))}}</a>, by: <a href="#">{{$post->creator->name}}</a></div>
-                            <!----category_article_date------>
-                            <div class="category_article_content">
-                                {{Str::limit($post->short_description,30,'...')}}
-                            </div>
-                            <!----category_article_content------>
-                            <div class="media_social">
-                                <span><a href="#"><i class="fa fa-share-alt"></i>424 </a> Shares</span>
-                                <span><i class="fa fa-comments-o"></i><a href="#">{{count($post->comments)}}</a> Comments</span>
-                            </div>
-                            <!----media_social------>
-                        </div>
-                    </div>
+    @foreach($category_post as $category)
+                <div class="article_title header_purple">
+                    <h2><a href="{{url('/category')}}/{{$category->id}}" target="_self">{{$category->name}}</a></h2>
                 </div>
-            @else
-            @if($i === 1)
-            <div class="category_article_wrapper">
-                <div class="row">
-                @endif
-                    <div class="col-md-6">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#"><img class="media-object" src="/post/{{$post->thumb_img}}"
-                                                alt="{{$post->title}}"></a>
+                <!----article_title------>
+                @foreach($category->posts as $i => $post)
+                @if($i === 0)
+                    <div class="category_article_wrapper">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="top_article_img">
+                                    <a href="single.html" target="_self"><img class="img-responsive"
+                                                                            src="/post/{{$post->list_img}}" alt="{{$post->title}}">
+                                    </a>
+                                </div>
+                                <!----top_article_img------>
                             </div>
-                            <div class="media-body">
+                            <div class="col-md-6">
                                 <span class="tag purple">{{$category->name}}</span>
 
-                                <h3 class="media-heading"><a href="single.html" target="_self">{{Str::limit($post->short_description,40,'...')}}</a></h3>
-                                <span class="media-date"><a href="#">{{date('j F, Y',strtotime($post->created_at))}}</a>,  by: <a href="#">{{$post->creator->name}}</a></span>
-
-                                <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>{{count($post->comments)}}</a> Comments</span>
+                                <div class="category_article_title">
+                                    <h2><a href="single.html" target="_self">{{$post->title}}</a></h2>
                                 </div>
+                                <!----category_article_title------>
+                                <div class="category_article_date"><a href="#">{{date('j F, Y',strtotime($post->created_at))}}</a>, by: <a href="#">{{$post->creator->name}}</a></div>
+                                <!----category_article_date------>
+                                <div class="category_article_content">
+                                    {{Str::limit($post->short_description,30,'...')}}
+                                </div>
+                                <!----category_article_content------>
+                                <div class="media_social">
+                                    <span><a href="#"><i class="fa fa-share-alt"></i>424 </a> Shares</span>
+                                    <span><i class="fa fa-comments-o"></i><a href="#">{{count($post->comments)}}</a> Comments</span>
+                                </div>
+                                <!----media_social------>
                             </div>
                         </div>
-                        <!-- <div class="media">
-                            <div class="media-left">
-                                <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm3.jpg"
-                                                alt="Generic placeholder image"></a>
+                    </div>
+                @else
+                @if($i === 1)
+                <div class="category_article_wrapper">
+                    <div class="row">
+                @endif
+                        <div class="col-md-6">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object"  style="margin-bottom:3px;" style="margin-bottom:4px;" src="/post/{{$post->thumb_img}}"
+                                                    alt="{{$post->title}}"></a>
+                                </div>
+                                <div class="media-body">
+                                    <span class="tag purple">{{$category->name}}</span>
+
+                                    <h3 class="media-heading"><a href="single.html" target="_self">{{Str::limit($post->title,60,'...')}}</a></h3>
+                                    <span class="media-date"><a href="#">{{date('j F, Y',strtotime($post->created_at))}}</a>,  by: <a href="#">{{$post->creator->name}}</a></span>
+
+                                    <div class="media_social">
+                                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
+                                        <span><a href="#"><i class="fa fa-comments-o"></i>{{count($post->comments)}}</a> Comments</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <span class="tag purple">Mobile</span>
+                            <!-- <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm3.jpg"
+                                                    alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <span class="tag purple">Mobile</span>
 
-                                <h3 class="media-heading"><a href="single.html" target="_self">The Portable Charger or data
-                                    cable</a></h3>
-                                <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+                                    <h3 class="media-heading"><a href="single.html" target="_self">The Portable Charger or data
+                                        cable</a></h3>
+                                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
 
-                                <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    <div class="media_social">
+                                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
+                                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        @if($loop->last)
+                        <!-- <div class="col-md-6">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm2.jpg"
+                                                    alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <span class="tag purple">Mobile</span>
+
+                                    <h3 class="media-heading"><a href="single.html" target="_self">Iphone 6 launches white & Grey
+                                        colors handset</a></h3>
+                                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+
+                                    <div class="media_social">
+                                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
+                                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm4.jpg"
+                                                    alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <span class="tag purple">Mobile</span>
+
+                                    <h3 class="media-heading"><a href="single.html" target="_self">Fully new look slim handset
+                                        like</a></h3>
+                                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+
+                                    <div class="media_social">
+                                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
+                                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    </div>
                                 </div>
                             </div>
                         </div> -->
                     </div>
-                    @if($loop->last)
-                    <!-- <div class="col-md-6">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm2.jpg"
-                                                alt="Generic placeholder image"></a>
-                            </div>
-                            <div class="media-body">
-                                <span class="tag purple">Mobile</span>
-
-                                <h3 class="media-heading"><a href="single.html" target="_self">Iphone 6 launches white & Grey
-                                    colors handset</a></h3>
-                                <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
-
-                                <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#"><img class="media-object" src="assets/img/cat-mobi-sm4.jpg"
-                                                alt="Generic placeholder image"></a>
-                            </div>
-                            <div class="media-body">
-                                <span class="tag purple">Mobile</span>
-
-                                <h3 class="media-heading"><a href="single.html" target="_self">Fully new look slim handset
-                                    like</a></h3>
-                                <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
-
-                                <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
-            </div>
-            @endif
-            @endif
-            @endforeach
-        <p class="divider"><a href="#">More News&nbsp;&raquo;</a></p>
-@endforeach
+                @endif
+                @endif
+                @endforeach
+            <p class="divider"><a href="#">More News&nbsp;&raquo;</a></p>
+    @endforeach
 </div>
 <!-- Mobile News Section -->
 </div>
 <!-- Left Section -->
 
 <div class="col-md-4">
-<div class="widget">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Popular News</a></h2>
-    </div>
-    @foreach($shareData['posts'] as $post)
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="/post/{{$post->thumb_img}}" alt="{{$post->title}}"></a>
+    <div class="widget">
+        <div class="widget_title widget_black">
+            <h2><a href="#">Popular News</a></h2>
         </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$post->title}}</a>
-            </h3> <span class="media-date"><a href="#">{{date('j F -Y',strtotime($post->created_at))}}</a>,  by: <a href="#">{{$post->creator->name}}</a></span>
+        @foreach($shareData['posts'] as $post)
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="/post/{{$post->thumb_img}}" alt="{{$post->title}}"></a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="single.html" target="_self">{{$post->title}}</a>
+                </h3> <span class="media-date"><a href="#">{{date('j F -Y',strtotime($post->created_at))}}</a>,  by: <a href="#">{{$post->creator->name}}</a></span>
 
-            <div class="widget_article_social">
-                <span>
-                    <a href="single.html" target="_self"> <i class="fa fa-share-alt"></i>424</a> Shares
-                </span> 
-                <span>
-                    <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{count($post->comments)}}</a> Comments
+                <div class="widget_article_social">
+                    <span>
+                        <a href="single.html" target="_self"> <i class="fa fa-share-alt"></i>424</a> Shares
+                    </span> 
+                    <span>
+                        <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{count($post->comments)}}</a> Comments
+                    </span>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
+    </div>
+    <!-- Popular News -->
+
+    <div class="widget hidden-xs m30">
+        <img class="img-responsive adv_img" src="assets/img/right_add1.jpg" alt="add_one">
+        <img class="img-responsive adv_img" src="assets/img/right_add2.jpg" alt="add_one">
+        <img class="img-responsive adv_img" src="assets/img/right_add3.jpg" alt="add_one">
+        <img class="img-responsive adv_img" src="assets/img/right_add4.jpg" alt="add_one">
+    </div>
+    <!-- Advertisement -->
+
+    <div class="widget hidden-xs m30">
+        <img class="img-responsive widget_img" src="assets/img/right_add5.jpg" alt="add_one">
+    </div>
+    <!-- Advertisement -->
+
+    <div class="widget reviews m30">
+        <div class="widget_title widget_black">
+            <h2><a href="#">Reviews</a></h2>
+        </div>
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="assets/img/pop_right1.jpg" alt="Generic placeholder image"></a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="single.html" target="_self">DSLR is the most old camera at this time readmore about new
+                        products</a>
+                </h3> 
+                <span class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
                 </span>
             </div>
         </div>
-    </div>
-    @endforeach
-    <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
-</div>
-<!-- Popular News -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive adv_img" src="assets/img/right_add1.jpg" alt="add_one">
-    <img class="img-responsive adv_img" src="assets/img/right_add2.jpg" alt="add_one">
-    <img class="img-responsive adv_img" src="assets/img/right_add3.jpg" alt="add_one">
-    <img class="img-responsive adv_img" src="assets/img/right_add4.jpg" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive widget_img" src="assets/img/right_add5.jpg" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget reviews m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Reviews</a></h2>
-    </div>
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="assets/img/pop_right1.jpg" alt="Generic placeholder image"></a>
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="assets/img/pop_right2.jpg" alt="Generic placeholder image"></a>
+            </div>
+            <div class="media-body"><h3 class="media-heading"><a href="single.html" target="_self">Samsung is the best
+                mobile in the android market.</a></h3> <span class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
+                </span></div>
         </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="single.html" target="_self">DSLR is the most old camera at this time readmore about new
-                    products</a>
-            </h3> 
-            <span class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-full"></i>
-            </span>
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="assets/img/pop_right3.jpg" alt="Generic placeholder image"></a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="single.html" target="_self">Apple launches photo-centric wrist watch for Android</a>
+                </h3> 
+                <span class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
+                </span></div>
         </div>
-    </div>
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="assets/img/pop_right2.jpg" alt="Generic placeholder image"></a>
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="assets/img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="single.html" target="_self">Yasaki camera launches new generic hi-speed shutter camera.</a>
+                </h3> 
+                <span class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
+                </span></div>
         </div>
-        <div class="media-body"><h3 class="media-heading"><a href="single.html" target="_self">Samsung is the best
-            mobile in the android market.</a></h3> <span class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-full"></i>
-            </span></div>
+        <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
     </div>
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="assets/img/pop_right3.jpg" alt="Generic placeholder image"></a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="single.html" target="_self">Apple launches photo-centric wrist watch for Android</a>
-            </h3> 
-            <span class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-full"></i>
-            </span></div>
-    </div>
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="assets/img/pop_right4.jpg" alt="Generic placeholder image"></a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="single.html" target="_self">Yasaki camera launches new generic hi-speed shutter camera.</a>
-            </h3> 
-            <span class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-full"></i>
-            </span></div>
-    </div>
-    <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
-</div>
-<!-- Reviews News -->
+    <!-- Reviews News -->
 
-<div class="widget hidden-xs m30">
-    <img class="img-responsive widget_img" src="assets/img/right_add6.jpg" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Most Commented</a></h2>
+    <div class="widget hidden-xs m30">
+        <img class="img-responsive widget_img" src="assets/img/right_add6.jpg" alt="add_one">
     </div>
-    @foreach($shareData['most_commented'] as $post)
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img class="media-object" src="/post/{{$post->thumb_img}}" alt="{{$post->title}}"></a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$post->title}}</a>
-            </h3>
+    <!-- Advertisement -->
 
-            <div class="media_social">
-                <span><i class="fa fa-comments-o"></i><a href="#">{{$post->comments_count}}</a> Comments</span>
+    <div class="widget m30">
+        <div class="widget_title widget_black">
+            <h2><a href="#">Most Commented</a></h2>
+        </div>
+        @foreach($shareData['most_commented'] as $post)
+        <div class="media">
+            <div class="media-left">
+                <a href="#"><img class="media-object" src="/post/{{$post->thumb_img}}" alt="{{$post->title}}"></a>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="single.html" target="_self">{{$post->title}}</a>
+                </h3>
+
+                <div class="media_social">
+                    <span><i class="fa fa-comments-o"></i><a href="#">{{$post->comments_count}}</a> Comments</span>
+                </div>
             </div>
         </div>
+        @endforeach
+        <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&nbsp;&raquo; </a></p>
     </div>
-    @endforeach
-    <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&nbsp;&raquo; </a></p>
-</div>
-<!-- Most Commented News -->
+    <!-- Most Commented News -->
 
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Editor Corner</a></h2>
+    <div class="widget m30">
+        <div class="widget_title widget_black">
+            <h2><a href="#">Editor Corner</a></h2>
+        </div>
+        <div class="widget_body"><img class="img-responsive left" src="assets/img/editor.jpg"
+                                    alt="Generic placeholder image">
+
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
+                users after installed base benefits. Dramatically visualize customer directed convergence without</p>
+
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
+                users after installed base benefits. Dramatically visualize customer directed convergence without
+                revolutionary ROI.</p>
+            <button class="btn pink">Read more</button>
+        </div>
     </div>
-    <div class="widget_body"><img class="img-responsive left" src="assets/img/editor.jpg"
-                                  alt="Generic placeholder image">
+    <!-- Editor News -->
 
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without</p>
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without
-            revolutionary ROI.</p>
-        <button class="btn pink">Read more</button>
+    <div class="widget hidden-xs m30">
+        <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
+        <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
+        <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
+        <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
     </div>
-</div>
-<!-- Editor News -->
+    <!--Advertisement -->
 
-<div class="widget hidden-xs m30">
-    <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
-    <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
-    <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
-    <img class="img-responsive add_img" src="assets/img/right_add7.jpg" alt="add_one">
-</div>
-<!--Advertisement -->
+    <div class="widget m30">
+        <div class="widget_title widget_black">
+            <h2><a href="#">Readers Corner</a></h2>
+        </div>
+        <div class="widget_body"><img class="img-responsive left" src="assets/img/reader.jpg"
+                                    alt="Generic placeholder image">
 
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Readers Corner</a></h2>
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
+                users after installed base benefits. Dramatically visualize customer directed convergence without</p>
+
+            <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
+                users after installed base benefits. Dramatically visualize customer directed convergence without
+                revolutionary ROI.</p>
+            <button class="btn pink">Read more</button>
+        </div>
     </div>
-    <div class="widget_body"><img class="img-responsive left" src="assets/img/reader.jpg"
-                                  alt="Generic placeholder image">
+    <!--  Readers Corner News -->
 
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without</p>
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without
-            revolutionary ROI.</p>
-        <button class="btn pink">Read more</button>
+    <div class="widget hidden-xs m30">
+        <img class="img-responsive widget_img" src="/assets/img/podcast.jpg" alt="add_one">
     </div>
-</div>
-<!--  Readers Corner News -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive widget_img" src="assets/img/podcast.jpg" alt="add_one">
-</div>
-<!--Advertisement-->
+    <!--Advertisement-->
 </div>
 <!-- Right Section -->
 

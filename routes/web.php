@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomePageController@index');
-Route::get('/list', 'ListPageController@index');
-Route::get('/details', 'DetailsPageController@index');
-
-
 Route::get('/adminPanel', function () {
     return view('admin.layout.master');
 });
+
+Route::get('/', 'HomePageController@index');
+Route::get('/list', 'ListPageController@index');
+Route::get('/details/{slug}', 'DetailsPageController@index');
+Route::get('/category/{id}', 'ListPageController@listing');
+
+
 
 Route::prefix('back')->middleware('auth')->group(function () {
     Route::get('/','Admin\DashboardController@index');
