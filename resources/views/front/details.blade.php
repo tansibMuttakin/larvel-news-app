@@ -5,7 +5,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            @foreach($posts as $post)
             <div class="entity_wrapper">
                 <div class="entity_title">
                     <h1><a href="#">{{$post->title}}</a></h1>
@@ -55,7 +54,6 @@
 
             </div>
             <!-- entity_wrapper -->
-            @endforeach
 
             <div class="related_news">
                 <div class="entity_inner__title header_purple">
@@ -64,30 +62,30 @@
                 <!-- entity_title -->
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#"><img class="media-object" src="/assets/img/cat-mobi-sm1.jpg"
-                                                alt="Generic placeholder image"></a>
-                            </div>
-                            <div class="media-body">
-                                <span class="tag purple"><a href="category.html" target="_self">Mobile</a></span>
+                    @foreach($related_post as $news)
+                        <div class="col-md-6">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object" src="/post/{{$news->thumb_img}}"
+                                                    alt="{{$news->title}}"></a>
+                                </div>
+                                <div class="media-body">
+                                    <span class="tag purple"><a href="category.html" target="_self">{{$news->category->name}}</a></span>
 
-                                <h3 class="media-heading"><a href="single.html" target="_self">Apple launches photo-centric wrist
-                                    watch for Android</a></h3>
-                                <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+                                    <h3 class="media-heading"><a href="{{url('/details')}}/{{$news->slug}}" target="_self">{{$news->title}}</a></h3>
+                                    <span class="media-date"><a href="#">{{date('F j, Y',strtotime($post->created_at))}}</a>,  by: <a href="#">{{$post->creator->name}}</a></span>
 
-                                <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    <div class="media_social">
+                                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
+                                        <span><a href="#"><i class="fa fa-comments-o"></i>{{count($post->comments)}}</a> Comments</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!-- Related news -->
-
             <div class="widget_advertisement">
                 <img class="img-responsive" src="/assets/img/category_advertisement.jpg" alt="feature-top">
             </div>
@@ -98,7 +96,8 @@
                     <h2>Readers Comment</h2>
                 </div>
                 <!-- entity_title -->
-
+                @foreach($post->comments as $comment)
+                @if($comment->status === 1)
                 <div class="media">
                     <div class="media-left">
                         <a href="#">
@@ -107,52 +106,8 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading"><a href="#">Sr. Ryan</a></h2>
-                        But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-                        no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-                        <div class="entity_vote">
-                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                            <a href="#"><span class="reply_ic">Reply </span></a>
-                        </div>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img alt="64x64" class="media-object" data-src="/assets/img/reader_img2.jpg"
-                                        src="/assets/img/reader_img2.jpg" data-holder-rendered="true">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h2 class="media-heading"><a href="#">Admin</a></h2>
-                                But who has any right to find fault with a man who chooses to enjoy a pleasure
-                                that has no annoying consequences, or one who avoids a pain that produces no
-                                resultant pleasure?
-
-                                <div class="entity_vote">
-                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                                    <a href="#"><span class="reply_ic">Reply </span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- media end -->
-
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img alt="64x64" class="media-object" data-src="/assets/img/reader_img3.jpg"
-                                src="/assets/img/reader_img3.jpg" data-holder-rendered="true">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="#">S. Joshep</a></h2>
-                        But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-                        no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
+                        <h2 class="media-heading"><a href="#">{{$comment->name}}</a></h2>
+                        {{$comment->comment}}
                         <div class="entity_vote">
                             <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
@@ -161,6 +116,8 @@
                     </div>
                 </div>
                 <!-- media end -->
+                @endif
+                @endforeach
             </div>
             <!--Readers Comment-->
 
@@ -176,15 +133,15 @@
                 <!--Entity Title -->
 
                 <div class="entity_comment_from">
-                    <form>
+                    <form action="{{url('/comments')}}" method="post">
+                    @csrf
+                        <input type="hidden" name="slug" value="{{$post->slug}}">
+                        <input type="hidden" name="id" value="{{$post->id}}">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputName" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
                         </div>
                         <div class="form-group comment">
-                            <textarea class="form-control" id="inputComment" placeholder="Comment"></textarea>
+                            <textarea class="form-control" name="comment" id="inputComment" placeholder="Comment"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-submit red">Submit</button>

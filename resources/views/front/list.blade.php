@@ -73,7 +73,7 @@
                         <!-- article_date -->
 
                         <div class="category_article_content">
-                            {{$post->short_description}}
+                            {{Str::limit($post->short_description,200,'...')}}
                         </div>
                         <!-- category_article_content -->
 

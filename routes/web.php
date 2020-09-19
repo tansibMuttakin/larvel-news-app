@@ -20,8 +20,10 @@ Route::get('/adminPanel', function () {
 
 Route::get('/', 'HomePageController@index');
 Route::get('/list', 'ListPageController@index');
-Route::get('/details/{slug}', 'DetailsPageController@index');
 Route::get('/category/{id}', 'ListPageController@listing');
+Route::get('/details/{slug}', 'DetailsPageController@index');
+Route::post('/comments', 'DetailsPageController@comment');
+
 
 
 
